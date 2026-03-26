@@ -1,44 +1,21 @@
 select * from patient_visits;
-select * from  diagnosis;
 
------- using the left join to put the idc_codes in one table
-select icd_code
-from patient_visits as p
-join diagnosis as d 
-on p. patient_id = d.patient_id
+ -----How many patient 
+	select count(visit_id)
+	from patient_visits
+    
+--------identify unique patient_id
+    select count(distinct patient_id) as Total_patient
+    from patient_visits;
 
-
------ To identify which gender group is more diagnosis in cpt_code
-
-select top 10 cpt_code,patient_age,patient_sex, 
-count(*) as number_of_people
-from patient_visits
-where patient_age >= 60  
-group by cpt_code, patient_age, patient_sex
-
----- What does the clinic’s patient population look like by Age?
-
- select patient_age, count(*) as patient 
-from  patient_visits
-group by patient_age
-order by patient_age asc 
-
----- What are the top diagnoses overall?
-
-select top 5 icd_code, count(*) as diagnosis_code 
-from diagnosis
-group by icd_code 
-order by diagnosis_code desc
+------ calaculate the average patient
+	select avg(total_patient_id) as Total
+    from (select patient_id, count(visit_id) as count_visit 
+    from patient_visits
+    group by patient_id;
 
 
----  Which CPT codes (procedures) are performed most often?*
-select top 5 cpt_code, count(*) as procedures
-from patient_visits
-group by cpt_code
-order by procedures desc 
-
-
----- fliter patient age
+------- Patient Population Overview
 select 
  case 
     when Patient_age < 18 then '0-17'
@@ -56,5 +33,33 @@ group by
      else '60+'
      end 
      order by age_group;
+     
+ --------Diagnosis Analysis cpt_code
+select  cpt_code,patient_age, 
+count(*) as number_of_people
+from patient_visits
+where patient_age >= 60  
+group by cpt_code, patient_age
+limit 10;
+
+----  Diagnosis Analysis by Icd_code
+select icd_code, patient_sex, count(*) as icd_code
+from patient_visits 
+group by icd_code, patient_sex
+limit 10;
+
+--------Procedure (CPT) Insights
+select cpt_code, count(*) as procedures
+from patient_visits
+group by cpt_code
+order by procedures desc 
+limit 5;
+
+----- Rank CPT codes by frequency to see which procedures are performed most often.
+select cpt_code, count(*) as frequency 
+from patient_visits
+   group by cpt_code 
+   having count(*) >2 
+   order by frequency desc
 
 
