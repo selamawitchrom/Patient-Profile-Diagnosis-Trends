@@ -1,15 +1,13 @@
-           🏥 Patient Profile & Diagnosis Trend
+        🏥 Patient Profile & Diagnosis Trend
            
 📌 Project Overview
 
 As a Data Analyst for a mid-sized healthcare clinic, this project analyzes synthetic electronic health record (EHR) data to identify clinical and operational factors associated with 30-day hospital readmissions.
-
 While clinicians focus on individual patients, this analysis uncovers broader patterns across the population to support better decision-making, risk identification, and care management strategies.
 
 📊 Dataset Description
 
 The dataset contains de-identified hospital encounter data, including:
-
 Patient demographics (age)
 Length of stay
 Discharge destination
@@ -69,6 +67,8 @@ Data quality assessment & validation
 Risk stratification modeling
 Translating clinical workflows into analytical logic
 Preparing datasets for Power BI dashboards
+
+
 🗂️ Project Structure
 hospital-readmission-analysis/
 │
@@ -84,6 +84,8 @@ hospital-readmission-analysis/
 │   └── data_dictionary.md
 │
 └── README.md
+
+
 📈 Tools & Technologies
 SQL Server
 Power BI
@@ -100,4 +102,7 @@ Longer hospital stays may indicate higher clinical complexity and risk
 
 Selamawit Engeda
 Healthcare Informatics | Clinical Data & Systems Analysis
+
+
+
 
